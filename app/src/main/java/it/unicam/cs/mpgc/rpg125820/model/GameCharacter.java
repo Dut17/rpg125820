@@ -52,7 +52,7 @@ public abstract class GameCharacter implements Combatant {
     }
 
     @Override
-    public int attackPower() {
+    public int getAttackPower() {
         return attackPower;
     }
 

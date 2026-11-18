@@ -11,7 +11,7 @@ public interface Combatant {
 
     boolean isAlive();
 
-    int attackPower();
+    int getAttackPower();
 
     /**
      * Applica un danno al combattente.

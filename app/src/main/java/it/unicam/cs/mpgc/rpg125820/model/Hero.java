@@ -41,7 +41,7 @@ public abstract class Hero extends GameCharacter {
             throw new IllegalStateException("Mana insufficiente");
         }
         mana -= SPECIAL_ABILITY_COST;
-        return attackPower() * SPECIAL_DAMAGE_MULTIPLIER;
+        return getAttackPower() * SPECIAL_DAMAGE_MULTIPLIER;
     }
 
     /**
