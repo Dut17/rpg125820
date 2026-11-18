@@ -65,4 +65,19 @@ public abstract class GameCharacter implements Combatant {
         currentHealth = Math.max(0, currentHealth - appliedDamage);
         return appliedDamage;
     }
+
+    /**
+     * Ripristina vita senza superare il massimo.
+     *
+     * @param amount la vita da ripristinare, non negativa
+     * @return la vita realmente recuperata
+     */
+    public int heal(int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("La cura non puo essere negativa");
+        }
+        int healed = Math.min(amount, maxHealth - currentHealth);
+        currentHealth += healed;
+        return healed;
+    }
 }
