@@ -10,6 +10,6 @@ public class Hunter extends Hero {
     private static final int DEFENSE = 3;
 
     public Hunter(String name) {
-        super(name, MAX_HEALTH, ATTACK_POWER, DEFENSE);
+        super(name, MAX_HEALTH, ATTACK_POWER, DEFENSE, new DoubleShot());
     }
 }

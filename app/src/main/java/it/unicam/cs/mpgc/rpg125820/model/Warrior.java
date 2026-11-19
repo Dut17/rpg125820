@@ -10,6 +10,6 @@ public class Warrior extends Hero {
     private static final int DEFENSE = 6;
 
     public Warrior(String name) {
-        super(name, MAX_HEALTH, ATTACK_POWER, DEFENSE);
+        super(name, MAX_HEALTH, ATTACK_POWER, DEFENSE, new PowerStrike());
     }
 }

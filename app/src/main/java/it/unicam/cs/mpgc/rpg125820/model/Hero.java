@@ -1,21 +1,28 @@
 package it.unicam.cs.mpgc.rpg125820.model;
 
+import java.util.Objects;
+
 /**
  * Personaggio controllato dal giocatore: ha mana, un'abilita speciale e pozioni.
+ * L'abilita speciale e delegata a un oggetto {@link Ability}, scelto da ogni ruolo.
  */
 public abstract class Hero extends GameCharacter {
 
     private static final int MAX_MANA = 20;
-    private static final int SPECIAL_ABILITY_COST = 10;
-    private static final int SPECIAL_DAMAGE_MULTIPLIER = 2;
     private static final int POTION_HEAL_AMOUNT = 30;
     private static final int STARTING_POTIONS = 3;
 
+    private final Ability ability;
     private int mana = MAX_MANA;
     private int potions = STARTING_POTIONS;
 
-    protected Hero(String name, int maxHealth, int attackPower, int defense) {
+    protected Hero(String name, int maxHealth, int attackPower, int defense, Ability ability) {
         super(name, maxHealth, attackPower, defense);
+        this.ability = Objects.requireNonNull(ability, "ability");
+    }
+
+    public Ability getAbility() {
+        return ability;
     }
 
     public int getMana() {
@@ -27,7 +34,7 @@ public abstract class Hero extends GameCharacter {
     }
 
     public boolean canUseSpecialAbility() {
-        return mana >= SPECIAL_ABILITY_COST;
+        return mana >= ability.getManaCost();
     }
 
     /**
@@ -40,8 +47,8 @@ public abstract class Hero extends GameCharacter {
         if (!canUseSpecialAbility()) {
             throw new IllegalStateException("Mana insufficiente");
         }
-        mana -= SPECIAL_ABILITY_COST;
-        return getAttackPower() * SPECIAL_DAMAGE_MULTIPLIER;
+        mana -= ability.getManaCost();
+        return ability.calculateDamage(getAttackPower());
     }
 
     /**

@@ -10,6 +10,6 @@ public class Mage extends Hero {
     private static final int DEFENSE = 1;
 
     public Mage(String name) {
-        super(name, MAX_HEALTH, ATTACK_POWER, DEFENSE);
+        super(name, MAX_HEALTH, ATTACK_POWER, DEFENSE, new Fireball());
     }
 }
