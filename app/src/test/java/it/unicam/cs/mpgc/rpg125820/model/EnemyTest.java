@@ -33,4 +33,16 @@ class EnemyTest {
     void invalidStatsAreRejected() {
         assertThrows(IllegalArgumentException.class, () -> new Enemy("Goblin", 0, 8, 2));
     }
+
+    @Test
+    void enemyReportsItsExperienceReward() {
+        Enemy goblin = new Enemy("Goblin", 40, 8, 2, 15);
+        assertEquals(15, goblin.getExperienceReward());
+        assertEquals(0, new Enemy("Goblin", 40, 8, 2).getExperienceReward());
+    }
+
+    @Test
+    void negativeExperienceRewardIsRejected() {
+        assertThrows(IllegalArgumentException.class, () -> new Enemy("Goblin", 40, 8, 2, -1));
+    }
 }
