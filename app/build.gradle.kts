@@ -21,8 +21,8 @@ dependencies {
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
-    // This dependency is used by the application.
-    implementation(libs.guava)
+    // Libreria per leggere e scrivere i salvataggi in formato JSON.
+    implementation("com.google.code.gson:gson:2.14.0")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
