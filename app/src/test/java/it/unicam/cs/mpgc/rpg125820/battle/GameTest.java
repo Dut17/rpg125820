@@ -81,4 +81,33 @@ class GameTest {
         assertThrows(NullPointerException.class, () -> new Game(null, arena));
         assertThrows(NullPointerException.class, () -> new Game(new Warrior("Eroe"), null));
     }
+
+    @Test
+    void resumedGameStartsFromTheGivenEnemy() {
+        Game game = new Game(new Warrior("Eroe"), new Arena("Foresta", List.of(GOBLIN, ORC)), 1);
+        assertEquals(GameState.IN_PROGRESS, game.getState());
+        assertEquals("Orco", game.getCurrentEnemy().getName());
+        assertEquals(1, game.getDefeatedEnemies());
+    }
+
+    @Test
+    void resumedGameCanBeCompleted() {
+        Game game = new Game(new Warrior("Eroe"), new Arena("Foresta", List.of(GOBLIN, ORC)), 1);
+        game.playTurn(HeroAction.ATTACK);
+        assertEquals(GameState.VICTORY, game.getState());
+        assertEquals(2, game.getDefeatedEnemies());
+    }
+
+    @Test
+    void resumeRejectsNegativeDefeatedEnemies() {
+        Arena arena = new Arena("Foresta", List.of(GOBLIN, ORC));
+        assertThrows(IllegalArgumentException.class, () -> new Game(new Warrior("Eroe"), arena, -1));
+    }
+
+    @Test
+    void resumeRejectsDefeatedEnemiesNotBelowTheTotal() {
+        Arena arena = new Arena("Foresta", List.of(GOBLIN, ORC));
+        assertThrows(IllegalArgumentException.class, () -> new Game(new Warrior("Eroe"), arena, 2));
+        assertThrows(IllegalArgumentException.class, () -> new Game(new Warrior("Eroe"), arena, 3));
+    }
 }
