@@ -43,7 +43,7 @@ class SaveServiceTest {
         original.playTurn(HeroAction.ATTACK);
 
         service.save(original, HeroType.WARRIOR);
-        Game resumed = service.load(arena).orElseThrow();
+        Game resumed = service.load(arena).orElseThrow().game();
 
         Hero before = original.getHero();
         Hero after = resumed.getHero();
@@ -56,6 +56,13 @@ class SaveServiceTest {
         assertEquals(original.getDefeatedEnemies(), resumed.getDefeatedEnemies());
         assertEquals("Orco", resumed.getCurrentEnemy().getName());
         assertEquals(GameState.IN_PROGRESS, resumed.getState());
+    }
+
+    @Test
+    void loadedGameKeepsTheHeroType() {
+        Game original = new Game(HeroType.MAGE.create("Maga"), arena);
+        service.save(original, HeroType.MAGE);
+        assertEquals(HeroType.MAGE, service.load(arena).orElseThrow().heroType());
     }
 
     @Test

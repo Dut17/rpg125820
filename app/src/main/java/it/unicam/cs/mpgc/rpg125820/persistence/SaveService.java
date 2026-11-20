@@ -44,20 +44,21 @@ public class SaveService {
     /**
      * Riprende l'ultima partita salvata nell'arena data.
      *
-     * @return la partita ripresa, oppure vuoto se non esiste nessun salvataggio
+     * @return la partita ripresa con il ruolo dell'eroe, oppure vuoto se non esiste nessun salvataggio
      * @throws IllegalStateException se il salvataggio non e coerente con l'arena o con le regole
      */
-    public Optional<Game> load(Arena arena) {
+    public Optional<LoadedGame> load(Arena arena) {
         Objects.requireNonNull(arena, "arena");
         return repository.load().map(snapshot -> restore(snapshot, arena));
     }
 
-    private Game restore(GameSnapshot snapshot, Arena arena) {
+    private LoadedGame restore(GameSnapshot snapshot, Arena arena) {
         try {
             Hero hero = snapshot.heroType().create(snapshot.heroName());
             hero.restoreState(snapshot.level(), snapshot.experience(), snapshot.health(),
                     snapshot.mana(), snapshot.potions());
-            return new Game(hero, arena, snapshot.defeatedEnemies());
+            Game game = new Game(hero, arena, snapshot.defeatedEnemies());
+            return new LoadedGame(game, snapshot.heroType());
         } catch (IllegalArgumentException e) {
             throw new IllegalStateException("Il salvataggio non e coerente", e);
         }
