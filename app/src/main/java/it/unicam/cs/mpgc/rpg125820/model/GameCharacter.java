@@ -80,4 +80,16 @@ public abstract class GameCharacter implements Combatant {
         currentHealth += healed;
         return healed;
     }
+
+    /**
+     * Imposta la vita corrente, per ricaricare una partita salvata.
+     *
+     * @param health la vita da impostare, tra 1 e la vita massima
+     */
+    protected void restoreHealth(int health) {
+        if (health <= 0 || health > maxHealth) {
+            throw new IllegalArgumentException("La vita deve essere tra 1 e la vita massima");
+        }
+        currentHealth = health;
+    }
 }

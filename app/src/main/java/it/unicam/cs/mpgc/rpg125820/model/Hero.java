@@ -102,4 +102,30 @@ public abstract class Hero extends GameCharacter {
         }
         return gained;
     }
+
+    /**
+     * Riporta l'eroe a uno stato salvato. Va usato solo per ricaricare una partita.
+     * I controlli avvengono prima di modificare qualunque campo.
+     *
+     * @throws IllegalArgumentException se uno dei valori non e valido
+     */
+    public void restoreState(int level, int experience, int health, int mana, int potions) {
+        if (level < 1 || level > MAX_LEVEL) {
+            throw new IllegalArgumentException("Livello non valido");
+        }
+        if (experience < 0) {
+            throw new IllegalArgumentException("L'esperienza non puo essere negativa");
+        }
+        if (mana < 0 || mana > MAX_MANA) {
+            throw new IllegalArgumentException("Mana non valido");
+        }
+        if (potions < 0 || potions > STARTING_POTIONS) {
+            throw new IllegalArgumentException("Numero di pozioni non valido");
+        }
+        restoreHealth(health);
+        this.level = level;
+        this.experience = experience;
+        this.mana = mana;
+        this.potions = potions;
+    }
 }
