@@ -138,4 +138,51 @@ class HeroTest {
         TestHero hero = new TestHero(100, 10, 0);
         assertThrows(IllegalArgumentException.class, () -> hero.gainExperience(-1));
     }
+
+    @Test
+    void restoreStateSetsAllSavedValues() {
+        TestHero hero = new TestHero(100, 10, 0);
+        hero.restoreState(3, 60, 40, 5, 1);
+        assertEquals(3, hero.getLevel());
+        assertEquals(60, hero.getExperience());
+        assertEquals(40, hero.getHealth());
+        assertEquals(5, hero.getMana());
+        assertEquals(1, hero.getPotions());
+    }
+
+    @Test
+    void restoreStateRejectsInvalidLevel() {
+        TestHero hero = new TestHero(100, 10, 0);
+        assertThrows(IllegalArgumentException.class, () -> hero.restoreState(0, 0, 50, 10, 1));
+        assertThrows(IllegalArgumentException.class, () -> hero.restoreState(6, 0, 50, 10, 1));
+    }
+
+    @Test
+    void restoreStateRejectsInvalidHealth() {
+        TestHero hero = new TestHero(100, 10, 0);
+        assertThrows(IllegalArgumentException.class, () -> hero.restoreState(1, 0, 0, 10, 1));
+        assertThrows(IllegalArgumentException.class, () -> hero.restoreState(1, 0, 101, 10, 1));
+    }
+
+    @Test
+    void restoreStateRejectsInvalidExperienceManaOrPotions() {
+        TestHero hero = new TestHero(100, 10, 0);
+        assertThrows(IllegalArgumentException.class, () -> hero.restoreState(1, -1, 50, 10, 1));
+        assertThrows(IllegalArgumentException.class, () -> hero.restoreState(1, 0, 50, -1, 1));
+        assertThrows(IllegalArgumentException.class, () -> hero.restoreState(1, 0, 50, 21, 1));
+        assertThrows(IllegalArgumentException.class, () -> hero.restoreState(1, 0, 50, 10, -1));
+        assertThrows(IllegalArgumentException.class, () -> hero.restoreState(1, 0, 50, 10, 4));
+    }
+
+    @Test
+    void failedRestoreLeavesHeroUnchanged() {
+        TestHero hero = new TestHero(100, 10, 0);
+        hero.takeDamage(10);
+        assertThrows(IllegalArgumentException.class, () -> hero.restoreState(3, 60, 40, 21, 1));
+        assertEquals(1, hero.getLevel());
+        assertEquals(0, hero.getExperience());
+        assertEquals(90, hero.getHealth());
+        assertEquals(20, hero.getMana());
+        assertEquals(3, hero.getPotions());
+    }
 }
