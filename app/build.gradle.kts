@@ -8,6 +8,8 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    // Aggiunge JavaFX al build, per l'interfaccia grafica.
+    id("org.openjfx.javafxplugin") version "0.1.0"
 }
 
 repositories {
@@ -23,6 +25,11 @@ dependencies {
 
     // Libreria per leggere e scrivere i salvataggi in formato JSON.
     implementation("com.google.code.gson:gson:2.14.0")
+}
+
+javafx {
+    version = "25.0.4"
+    modules = listOf("javafx.controls")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

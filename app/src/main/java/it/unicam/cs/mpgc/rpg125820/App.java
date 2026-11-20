@@ -3,12 +3,15 @@
  */
 package it.unicam.cs.mpgc.rpg125820;
 
+import it.unicam.cs.mpgc.rpg125820.ui.RpgApplication;
+import javafx.application.Application;
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        Application.launch(RpgApplication.class, args);
     }
 }
