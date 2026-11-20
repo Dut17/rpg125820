@@ -15,14 +15,28 @@ public class Game {
 
     private final Hero hero;
     private final List<Enemy> enemies;
-    private int defeatedEnemies = 0;
+    private int defeatedEnemies;
     private Battle battle;
     private GameState state = GameState.IN_PROGRESS;
 
     public Game(Hero hero, Arena arena) {
+        this(hero, arena, 0);
+    }
+
+    /**
+     * Riprende una partita: i primi nemici sono gia stati sconfitti, il nemico
+     * corrente parte con la vita piena.
+     *
+     * @param defeatedEnemies nemici gia sconfitti, da 0 a numero di nemici - 1
+     */
+    public Game(Hero hero, Arena arena, int defeatedEnemies) {
         this.hero = Objects.requireNonNull(hero, "hero");
         this.enemies = Objects.requireNonNull(arena, "arena").createEnemies();
-        this.battle = new Battle(hero, enemies.get(0));
+        if (defeatedEnemies < 0 || defeatedEnemies >= enemies.size()) {
+            throw new IllegalArgumentException("Numero di nemici sconfitti non valido");
+        }
+        this.defeatedEnemies = defeatedEnemies;
+        this.battle = new Battle(hero, enemies.get(defeatedEnemies));
     }
 
     public Hero getHero() {
