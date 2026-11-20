@@ -83,4 +83,59 @@ class HeroTest {
         hero.usePotion();
         assertThrows(IllegalStateException.class, hero::usePotion);
     }
+
+    @Test
+    void newHeroStartsAtLevelOneWithoutExperience() {
+        TestHero hero = new TestHero(100, 10, 0);
+        assertEquals(1, hero.getLevel());
+        assertEquals(0, hero.getExperience());
+    }
+
+    @Test
+    void experienceBelowThresholdKeepsLevelAndDoesNotRestore() {
+        TestHero hero = new TestHero(100, 10, 0);
+        hero.takeDamage(50);
+        hero.useSpecialAbility();
+        int levelsGained = hero.gainExperience(19);
+        assertEquals(0, levelsGained);
+        assertEquals(1, hero.getLevel());
+        assertEquals(19, hero.getExperience());
+        assertEquals(50, hero.getHealth());
+        assertEquals(10, hero.getMana());
+    }
+
+    @Test
+    void reachingThresholdLevelsUpAndRestoresHealthAndMana() {
+        TestHero hero = new TestHero(100, 10, 0);
+        hero.takeDamage(50);
+        hero.useSpecialAbility();
+        int levelsGained = hero.gainExperience(20);
+        assertEquals(1, levelsGained);
+        assertEquals(2, hero.getLevel());
+        assertEquals(100, hero.getHealth());
+        assertEquals(20, hero.getMana());
+    }
+
+    @Test
+    void singleGainCanGiveSeveralLevels() {
+        TestHero hero = new TestHero(100, 10, 0);
+        int levelsGained = hero.gainExperience(100);
+        assertEquals(3, levelsGained);
+        assertEquals(4, hero.getLevel());
+    }
+
+    @Test
+    void levelNeverExceedsMaximum() {
+        TestHero hero = new TestHero(100, 10, 0);
+        hero.gainExperience(1000);
+        assertEquals(5, hero.getLevel());
+        assertEquals(0, hero.gainExperience(50));
+        assertEquals(1050, hero.getExperience());
+    }
+
+    @Test
+    void negativeExperienceIsRejected() {
+        TestHero hero = new TestHero(100, 10, 0);
+        assertThrows(IllegalArgumentException.class, () -> hero.gainExperience(-1));
+    }
 }
