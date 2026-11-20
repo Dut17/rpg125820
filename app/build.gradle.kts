@@ -48,3 +48,9 @@ tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+
+tasks.named("run") {
+    // Il plugin JavaFX legge le estensioni del task durante l'esecuzione,
+    // cosa che la configuration cache non supporta.
+    notCompatibleWithConfigurationCache("Il plugin JavaFX non e compatibile con la configuration cache")
+}
