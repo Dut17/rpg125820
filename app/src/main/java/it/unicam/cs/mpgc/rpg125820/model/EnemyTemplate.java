@@ -1,15 +1,16 @@
 package it.unicam.cs.mpgc.rpg125820.model;
 
 /**
- * Descrizione fissa di un tipo di nemico: nome e statistiche base.
+ * Descrizione fissa di un tipo di nemico: nome, statistiche base e premio di esperienza.
  * Non ha stato di gioco, quindi puo essere riusata in ogni partita.
  */
-public record EnemyTemplate(String name, int maxHealth, int attackPower, int defense) {
+public record EnemyTemplate(String name, int maxHealth, int attackPower, int defense,
+                            int experienceReward) {
 
     /**
      * @return un nuovo nemico con vita piena
      */
     public Enemy createEnemy() {
-        return new Enemy(name, maxHealth, attackPower, defense);
+        return new Enemy(name, maxHealth, attackPower, defense, experienceReward);
     }
 }
