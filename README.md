@@ -47,11 +47,27 @@ La logica di gioco non dipende dall'interfaccia grafica.
 
 Logica di gioco, persistenza, controller e interfaccia grafica JavaFX sono completati. La logica di gioco, la persistenza e il controller sono coperti da test automatici; l'interfaccia grafica è stata provata a mano.
 
+---
+
 ## Uso di strumenti di AI
 
-E stato utilizzato un assistente AI (Perplexity).
+- Utilizzato Perplexity per:
+  - Discussione della progettazione (classi, responsabilità, punti di estensione)
+  - Spiegazione degli errori di build e dei test, con proposte di correzione
+  - Scrittura delle classi di test per verificare ogni classe sviluppata
+  - Preparazione dei commit (messaggi e contenuto), poi approvati da me
 
-Attivita svolte dall'assistente:
+- Scopo dell'uso dell'AI:
+  - Ragionare sulla progettazione e capire gli errori di build e di test
+  - Velocizzare la scrittura dei test, mantenendo io il controllo delle scelte e del codice finale
 
-- discussione della progettazione (classi, responsabilita, punti di estensione)
-- spiegazione degli errori di build e dei test
+- Svolto da me (Dut17):
+  - Scelta del tipo di gioco, delle regole, del sistema di livelli ed esperienza e dei valori di vita dei nemici
+  - Scelta delle tecnologie: JSON per il salvataggio e JavaFX per l'interfaccia
+  - Scrittura del codice
+  - Esecuzione delle build in locale e verifica dei risultati
+  - Revisione e approvazione di ogni commit
+
+- Processo di lavoro:
+  - Piccoli passi con molti commit: ogni classe o funzionalità ha un commit e, subito dopo, un commit con i relativi test
+  - Build e test eseguiti in locale dopo ogni modifica, per individuare subito gli errori
