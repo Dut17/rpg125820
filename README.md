@@ -61,7 +61,7 @@ Logica di gioco, persistenza, controller e interfaccia grafica JavaFX sono compl
   - Ragionare sulla progettazione e capire gli errori di build e di test
   - Velocizzare la scrittura dei test, mantenendo io il controllo delle scelte e del codice finale
 
-- Svolto da me (Dut17):
+- Svolto da me (Io):
   - Scelta del tipo di gioco, delle regole, del sistema di livelli ed esperienza e dei valori di vita dei nemici
   - Scelta delle tecnologie: JSON per il salvataggio e JavaFX per l'interfaccia
   - Scrittura del codice
