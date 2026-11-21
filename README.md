@@ -36,22 +36,9 @@ Logica di gioco, persistenza e controller sono completati e coperti da test. L'i
 
 ## Uso di strumenti di AI
 
-E stato utilizzato un assistente AI (Perplexity), con accesso al repository tramite il connettore GitHub.
+E stato utilizzato un assistente AI (Perplexity).
 
 Attivita svolte dall'assistente:
 
 - discussione della progettazione (classi, responsabilita, punti di estensione)
-- scrittura della maggior parte del codice sorgente e dei test JUnit
 - spiegazione degli errori di build e dei test
-- creazione dei commit, ciascuno dopo la mia conferma esplicita
-
-Attivita svolte da me:
-
-- scelta delle funzionalita e delle regole di gioco (ruoli, livelli, valori dei nemici, formato di salvataggio)
-- approvazione di ogni modifica prima del commit
-- esecuzione di build e test in locale e segnalazione degli errori
-- revisione del codice per comprenderlo
-
-Il livello di intervento diretto sul codice e quindi limitato: la maggior parte del codice e dei test e stata scritta dall'assistente.
-
-La dichiarazione dettagliata e nella Wiki del repository.
