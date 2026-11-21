@@ -43,7 +43,7 @@ public class StartView extends VBox {
         setAlignment(Pos.CENTER);
         setPadding(new Insets(PADDING));
 
-        Label title = new Label("RPG");
+        Label title = new Label("Cronache di Valdoria");
         title.setStyle("-fx-font-size: 28px; -fx-font-weight: bold;");
 
         nameField.setPromptText("Nome dell'eroe");

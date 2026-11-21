@@ -28,7 +28,7 @@ public class RpgApplication extends Application {
         controller = new GameController(
                 new SaveService(new JsonSaveRepository(SAVE_FILE)), Arenas.forest());
         scene = new Scene(new StartView(controller, this::showBattle), WINDOW_WIDTH, WINDOW_HEIGHT);
-        stage.setTitle("RPG");
+        stage.setTitle("Cronache di Valdoria");
         stage.setScene(scene);
         stage.show();
     }
